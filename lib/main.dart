@@ -10,9 +10,9 @@ class MyApp extends StatelessWidget {
       title: 'Automate',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
-        primarySwatch: Colors.blue,
+        primarySwatch: Colors.indigo,
       ),
-      home: MyHomePage(title: 'Home automation'),
+      home: MyHomePage(title: 'Automate'),
     );
   }
 }

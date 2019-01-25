@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 
-import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_database/firebase_database.dart';
+
+DatabaseReference mainReference = FirebaseDatabase.instance.reference();
 
 class MyHomePage extends StatefulWidget {
   MyHomePage({Key key, this.title}) : super(key: key);
@@ -15,59 +17,87 @@ class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(
-          title: Text(widget.title),
-        ),
-        body: StreamBuilder(
-          stream: Firestore.instance.collection('flutter_data').snapshots(),
-          builder:
-              (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
-            if (!snapshot.hasData) return CircularProgressIndicator();
-            return FirestoreListView(documents: snapshot.data.documents);
-          },
-        ));
+      appBar: AppBar(
+        title: Text(widget.title),
+        actions: <Widget>[
+          IconButton(
+            icon: Icon(Icons.settings),
+            onPressed: () {},
+          )
+        ],
+      ),
+      body: StreamBuilder<Event>(
+        stream: FirebaseDatabase.instance.reference().child('devices').onValue,
+        builder: (BuildContext context, AsyncSnapshot<Event> event) {
+          if (!event.hasData)
+            return new Center(child: CircularProgressIndicator());
+          // print(event.data.snapshot.value);
+          // return Container();
+          return FirestoreListView(documents: event.data.snapshot.value);
+        },
+      ),
+    );
   }
 }
 
 class FirestoreListView extends StatelessWidget {
-  final List<DocumentSnapshot> documents;
+  final documents;
 
   FirestoreListView({this.documents});
 
   @override
   Widget build(BuildContext context) {
-    return ListView.builder(
-      itemCount: documents.length,
-      itemExtent: 90.0,
-      itemBuilder: (BuildContext context, int index) {
-        String title = documents[index].data['device'].toString();
-        bool status = documents[index].data['status'];
-        return ListTile(
-          title: Container(
-            // decoration: BoxDecoration(
-            //     borderRadius: BorderRadius.circular(5.0),
-            //     border: Border.all(color: Colors.black)),
-            // padding: EdgeInsets.all(15.0),
-            child: Row(
-              children: <Widget>[
-                Text(title),
-                Switch(
-                  value: status,
-                  onChanged: (e) {
-                    Firestore.instance
-                        .runTransaction((Transaction transaction) async {
-                      DocumentSnapshot snapshot =
-                          await transaction.get(documents[index].reference);
-                      await transaction.update(
-                          snapshot.reference, {"status": !snapshot["status"]});
-                    });
-                  },
-                ),
-              ],
+    print(documents);
+    if (documents != null) {
+      return ListView.builder(
+        itemCount: documents.length,
+        // itemExtent: 90.0,
+        itemBuilder: (BuildContext context, int index) {
+          Map<dynamic, dynamic> object = documents[index];
+          print(object);
+          String title = object['name'];
+          print(title);
+          bool status = object['status'];
+          // Map<String, dynamic> user = jsonDecode(documents);
+          // bool status = documents['led'].data['status'];
+          return Card(
+            child: ListTile(
+              title: Text(
+                title,
+                style: TextStyle(fontSize: 18.0),
+              ),
+              // subtitle: Text(''),
+              trailing: Switch(
+                value: status,
+                onChanged: (e) {
+                  status = !status;
+                  mainReference
+                      .child('devices')
+                      .child(index.toString())
+                      .set({"name": title, "status": status});
+                },
+              ),
+              // title: Container(
+              //   child: Row(
+              //     children: <Widget>[
+              //       Text(title),
+              // Switch(
+              //   value: status,
+              //   onChanged: (e) {
+              //     status = !status;
+              //     mainReference
+              //         .child('devices')
+              //         .child(index.toString())
+              //         .set({"name": title, "status": status});
+              //   },
+              // ),
+              //     ],
+              //   ),
+              // ),
             ),
-          ),
-        );
-      },
-    );
+          );
+        },
+      );
+    }
   }
 }
