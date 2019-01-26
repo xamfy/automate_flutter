@@ -9,9 +9,10 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Automate',
       debugShowCheckedModeBanner: false,
-      theme: ThemeData(
-        primarySwatch: Colors.indigo,
-      ),
+      // theme: ThemeData(
+      //   primarySwatch: Colors.indigo,
+      // ),
+      theme: new ThemeData(primaryColor: Color.fromRGBO(58, 66, 86, 1.0)),
       home: MyHomePage(title: 'Automate'),
     );
   }
