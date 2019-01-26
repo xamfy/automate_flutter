@@ -38,6 +38,7 @@ class FirebaseListView extends StatelessWidget {
                 decoration:
                     BoxDecoration(color: Color.fromRGBO(64, 75, 96, .9)),
                 child: ListTile(
+                  leading: Icon(Icons.phonelink),
                   contentPadding:
                       EdgeInsets.symmetric(horizontal: 20.0, vertical: 10.0),
                   title: Text(

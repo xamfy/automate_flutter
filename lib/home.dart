@@ -21,7 +21,7 @@ class _MyHomePageState extends State<MyHomePage> {
       title: Text('Automate'),
       actions: <Widget>[
         IconButton(
-          icon: Icon(Icons.settings),
+          icon: Icon(Icons.more_vert),
           onPressed: () {
             Navigator.of(context).push(MaterialPageRoute(
                 builder: (BuildContext context) => SettingsPage()));
