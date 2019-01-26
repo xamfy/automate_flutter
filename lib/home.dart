@@ -103,8 +103,7 @@ class FirestoreListView extends StatelessWidget {
           print(title);
           bool status = object['status'];
           Color c = (status == true) ? Colors.indigo : Colors.grey;
-          Color iconColor =
-              (status == true) ? Colors.greenAccent : Colors.yellowAccent;
+          Color iconColor = (status == true) ? Colors.greenAccent : Colors.grey;
           // Map<String, dynamic> user = jsonDecode(documents);
           // bool status = documents['led'].data['status'];
           return Card(
@@ -130,7 +129,13 @@ class FirestoreListView extends StatelessWidget {
                 ),
                 subtitle: Row(
                   children: <Widget>[
-                    Icon(Icons.stop, color: iconColor),
+                    // Icon(Icons.check_circle, color: iconColor),
+                    Container(
+                        padding: const EdgeInsets.all(6.0),
+                        decoration: new BoxDecoration(
+                          shape: BoxShape.circle,
+                          color: iconColor,
+                        )),
                     // Text("", style: TextStyle(color: Colors.white))
                   ],
                 ),
