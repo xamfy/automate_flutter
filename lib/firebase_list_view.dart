@@ -27,7 +27,13 @@ class FirebaseListView extends StatelessWidget {
             margin: new EdgeInsets.symmetric(horizontal: 10.0, vertical: 8.0),
             color: c,
             child: InkWell(
-              onTap: () {},
+              onTap: () {
+                status = !status;
+                mainReference
+                    .child('devices')
+                    .child(index.toString())
+                    .set({"name": title, "status": status});
+              },
               child: Container(
                 decoration:
                     BoxDecoration(color: Color.fromRGBO(64, 75, 96, .9)),
