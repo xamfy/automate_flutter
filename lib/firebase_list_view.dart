@@ -62,7 +62,7 @@ class FirebaseListView extends StatelessWidget {
                 child: ListTile(
                   leading: CachedNetworkImage(
                     imageUrl: url,
-                    placeholder: new CircularProgressIndicator(),
+                    // placeholder: new CircularProgressIndicator(),
                     errorWidget: new Icon(Icons.error),
                     height: 32.0,
                   ),
