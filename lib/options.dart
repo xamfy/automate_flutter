@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 
-class SettingsPage extends StatelessWidget {
+class OptionsPage extends StatelessWidget {
   final topAppBar = AppBar(
     elevation: 0.1,
     backgroundColor: Color.fromRGBO(58, 66, 86, 1.0),
-    title: Text('Settings'),
+    title: Text('Options'),
   );
 
   @override

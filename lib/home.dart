@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:firebase_database/firebase_database.dart';
 
 import 'firebase_list_view.dart';
-import 'settings.dart';
+import 'options.dart';
 
 class MyHomePage extends StatefulWidget {
   MyHomePage({Key key, this.title}) : super(key: key);
@@ -24,7 +24,7 @@ class _MyHomePageState extends State<MyHomePage> {
           icon: Icon(Icons.more_vert),
           onPressed: () {
             Navigator.of(context).push(MaterialPageRoute(
-                builder: (BuildContext context) => SettingsPage()));
+                builder: (BuildContext context) => OptionsPage()));
           },
         )
       ],
