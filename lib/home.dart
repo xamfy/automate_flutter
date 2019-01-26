@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-
 import 'package:firebase_database/firebase_database.dart';
 
-DatabaseReference mainReference = FirebaseDatabase.instance.reference();
+import 'firebase_list_view.dart';
+import 'settings.dart';
 
 class MyHomePage extends StatefulWidget {
   MyHomePage({Key key, this.title}) : super(key: key);
@@ -14,17 +14,22 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  final topAppBar = AppBar(
-    elevation: 0.1,
-    backgroundColor: Color.fromRGBO(58, 66, 86, 1.0),
-    title: Text('Automate'),
-    actions: <Widget>[
-      IconButton(
-        icon: Icon(Icons.settings),
-        onPressed: () {},
-      )
-    ],
-  );
+  Widget topAppBar(BuildContext context) {
+    return AppBar(
+      elevation: 0.1,
+      backgroundColor: Color.fromRGBO(58, 66, 86, 1.0),
+      title: Text('Automate'),
+      actions: <Widget>[
+        IconButton(
+          icon: Icon(Icons.settings),
+          onPressed: () {
+            Navigator.of(context).push(MaterialPageRoute(
+                builder: (BuildContext context) => SettingsPage()));
+          },
+        )
+      ],
+    );
+  }
 
   final makeBottom = Container(
     height: 55.0,
@@ -59,17 +64,7 @@ class _MyHomePageState extends State<MyHomePage> {
     return Scaffold(
       backgroundColor: Color.fromRGBO(58, 66, 86, 1.0),
       bottomNavigationBar: makeBottom,
-      // appBar: AppBar(
-      //   elevation: 0,
-      //   title: Text(widget.title),
-      //   actions: <Widget>[
-      //     IconButton(
-      //       icon: Icon(Icons.settings),
-      //       onPressed: () {},
-      //     )
-      //   ],
-      // ),
-      appBar: topAppBar,
+      appBar: topAppBar(context),
       body: StreamBuilder<Event>(
         stream: FirebaseDatabase.instance.reference().child('devices').onValue,
         builder: (BuildContext context, AsyncSnapshot<Event> event) {
@@ -77,101 +72,9 @@ class _MyHomePageState extends State<MyHomePage> {
             return new Center(child: CircularProgressIndicator());
           // print(event.data.snapshot.value);
           // return Container();
-          return FirestoreListView(documents: event.data.snapshot.value);
+          return FirebaseListView(documents: event.data.snapshot.value);
         },
       ),
     );
-  }
-}
-
-class FirestoreListView extends StatelessWidget {
-  final documents;
-
-  FirestoreListView({this.documents});
-
-  @override
-  Widget build(BuildContext context) {
-    print(documents);
-    if (documents != null) {
-      return ListView.builder(
-        itemCount: documents.length,
-        // itemExtent: 90.0,
-        itemBuilder: (BuildContext context, int index) {
-          Map<dynamic, dynamic> object = documents[index];
-          print(object);
-          String title = object['name'];
-          print(title);
-          bool status = object['status'];
-          Color c = (status == true) ? Colors.indigo : Colors.grey;
-          Color iconColor = (status == true) ? Colors.greenAccent : Colors.grey;
-          // Map<String, dynamic> user = jsonDecode(documents);
-          // bool status = documents['led'].data['status'];
-          return Card(
-            // shape: RoundedRectangleBorder(
-            //     side: new BorderSide(color: Colors.blue, width: 2.0),
-            //     borderRadius: BorderRadius.circular(10.0)),
-            // shape: RoundedRectangleBorder(
-            //   borderRadius: BorderRadius.circular(15.0),
-            // ),
-
-            elevation: 8.0,
-            margin: new EdgeInsets.symmetric(horizontal: 10.0, vertical: 6.0),
-            color: c,
-            child: Container(
-              decoration: BoxDecoration(color: Color.fromRGBO(64, 75, 96, .9)),
-              child: ListTile(
-                contentPadding:
-                    EdgeInsets.symmetric(horizontal: 20.0, vertical: 10.0),
-                title: Text(
-                  title,
-                  style: TextStyle(
-                      color: Colors.white, fontWeight: FontWeight.bold),
-                ),
-                subtitle: Row(
-                  children: <Widget>[
-                    // Icon(Icons.check_circle, color: iconColor),
-                    Container(
-                        padding: const EdgeInsets.all(6.0),
-                        decoration: new BoxDecoration(
-                          shape: BoxShape.circle,
-                          color: iconColor,
-                        )),
-                    // Text("", style: TextStyle(color: Colors.white))
-                  ],
-                ),
-                trailing: Switch(
-                  activeColor: Colors.white,
-                  value: status,
-                  onChanged: (e) {
-                    status = !status;
-                    mainReference
-                        .child('devices')
-                        .child(index.toString())
-                        .set({"name": title, "status": status});
-                  },
-                ),
-                // title: Container(
-                //   child: Row(
-                //     children: <Widget>[
-                //       Text(title),
-                // Switch(
-                //   value: status,
-                //   onChanged: (e) {
-                //     status = !status;
-                //     mainReference
-                //         .child('devices')
-                //         .child(index.toString())
-                //         .set({"name": title, "status": status});
-                //   },
-                // ),
-                //     ],
-                //   ),
-                // ),
-              ),
-            ),
-          );
-        },
-      );
-    }
   }
 }

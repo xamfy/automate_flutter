@@ -12,7 +12,9 @@ class MyApp extends StatelessWidget {
       // theme: ThemeData(
       //   primarySwatch: Colors.indigo,
       // ),
-      theme: new ThemeData(primaryColor: Color.fromRGBO(58, 66, 86, 1.0)),
+      theme: new ThemeData(
+          primaryColor: Color.fromRGBO(58, 66, 86, 1.0),
+          primarySwatch: Colors.grey),
       home: MyHomePage(title: 'Automate'),
     );
   }
