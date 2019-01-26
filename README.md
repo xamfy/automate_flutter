@@ -1,4 +1,5 @@
 # Automate
 
 Flutter client for automate
-![Screenshot](screenshots/flutter_01.png)
+
+<img src="screenshots/flutter_01.png" width="350" height="600" />
