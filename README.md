@@ -1,3 +1,3 @@
 # Automate
 
-Flutter client for automation home automation project.
+Flutter client for automate
