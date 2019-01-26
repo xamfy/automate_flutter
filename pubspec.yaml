@@ -12,6 +12,7 @@ dependencies:
 
   firebase_database:
   firebase_core:
+  cached_network_image: ^0.5.1
 
 dev_dependencies:
   flutter_test:

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_database/firebase_database.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 
 DatabaseReference mainReference = FirebaseDatabase.instance.reference();
 
@@ -7,6 +8,26 @@ class FirebaseListView extends StatelessWidget {
   final documents;
 
   FirebaseListView({this.documents});
+
+  String _findIcon(title) {
+    String a = "https://i.imgur.com/O774D8O.png";
+    switch (title) {
+      case "AC":
+        a = "https://i.imgur.com/O774D8O.png";
+        break;
+      case "Heater":
+        a = "https://i.imgur.com/Yljp3a9.png";
+        break;
+      case "Fan":
+        a = "https://i.imgur.com/gvwNMq0.png";
+        break;
+      case "LED":
+      case "Tubelight":
+        a = "https://i.imgur.com/5G2G8Aq.png";
+        break;
+    }
+    return a;
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -20,6 +41,7 @@ class FirebaseListView extends StatelessWidget {
           String title = object['name'];
           print(title);
           bool status = object['status'];
+          String url = _findIcon(title);
           Color c = (status == true) ? Colors.indigo : Colors.grey;
           Color iconColor = (status == true) ? Colors.greenAccent : Colors.grey;
           return Card(
@@ -38,7 +60,12 @@ class FirebaseListView extends StatelessWidget {
                 decoration:
                     BoxDecoration(color: Color.fromRGBO(64, 75, 96, .9)),
                 child: ListTile(
-                  leading: Icon(Icons.phonelink),
+                  leading: CachedNetworkImage(
+                    imageUrl: url,
+                    placeholder: new CircularProgressIndicator(),
+                    errorWidget: new Icon(Icons.error),
+                    height: 32.0,
+                  ),
                   contentPadding:
                       EdgeInsets.symmetric(horizontal: 20.0, vertical: 10.0),
                   title: Text(
