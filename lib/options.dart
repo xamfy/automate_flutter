@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class OptionsPage extends StatelessWidget {
   final topAppBar = AppBar(
@@ -6,6 +7,15 @@ class OptionsPage extends StatelessWidget {
     backgroundColor: Color.fromRGBO(58, 66, 86, 1.0),
     title: Text('Options'),
   );
+
+  _launchAbout() async {
+    const url = 'https://github.com/xamirtz/automate_flutter_client';
+    if (await canLaunch(url)) {
+      await launch(url);
+    } else {
+      throw 'Could not launch $url';
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -24,12 +34,15 @@ class OptionsPage extends StatelessWidget {
                   fontWeight: FontWeight.bold),
             ),
             SizedBox(height: 25.0),
-            Text(
-              'About',
-              style: TextStyle(
-                  fontSize: 25.0,
-                  color: Colors.white,
-                  fontWeight: FontWeight.bold),
+            GestureDetector(
+              onTap: _launchAbout,
+              child: Text(
+                'About',
+                style: TextStyle(
+                    fontSize: 25.0,
+                    color: Colors.white,
+                    fontWeight: FontWeight.bold),
+              ),
             ),
             SizedBox(height: 25.0),
             Text(
