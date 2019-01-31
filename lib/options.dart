@@ -29,7 +29,7 @@ class OptionsPage extends StatelessWidget {
             Text(
               'Add device',
               style: TextStyle(
-                  fontSize: 25.0,
+                  fontSize: 22.0,
                   color: Colors.white,
                   fontWeight: FontWeight.bold),
             ),
@@ -39,16 +39,16 @@ class OptionsPage extends StatelessWidget {
               child: Text(
                 'About',
                 style: TextStyle(
-                    fontSize: 25.0,
+                    fontSize: 22.0,
                     color: Colors.white,
                     fontWeight: FontWeight.bold),
               ),
             ),
-            SizedBox(height: 25.0),
+            SizedBox(height: 22.0),
             Text(
               'Support',
               style: TextStyle(
-                  fontSize: 25.0,
+                  fontSize: 22.0,
                   color: Colors.white,
                   fontWeight: FontWeight.bold),
             )

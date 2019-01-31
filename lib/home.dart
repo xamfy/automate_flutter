@@ -8,6 +8,7 @@ import 'package:connectivity/connectivity.dart';
 //pages
 import 'firebase_list_view.dart';
 import 'options.dart';
+import 'account_page.dart';
 
 class MyHomePage extends StatefulWidget {
   MyHomePage({Key key, this.title}) : super(key: key);
@@ -76,33 +77,38 @@ class _MyHomePageState extends State<MyHomePage> {
     );
   }
 
-  final makeBottom = Container(
-    height: 55.0,
-    child: BottomAppBar(
-      color: Color.fromRGBO(58, 66, 86, 1.0),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-        children: <Widget>[
-          IconButton(
-            icon: Icon(Icons.home, color: Colors.white),
-            onPressed: () {},
-          ),
-          IconButton(
-            icon: Icon(Icons.blur_on, color: Colors.white),
-            onPressed: () {},
-          ),
-          IconButton(
-            icon: Icon(Icons.hotel, color: Colors.white),
-            onPressed: () {},
-          ),
-          IconButton(
-            icon: Icon(Icons.account_box, color: Colors.white),
-            onPressed: () {},
-          )
-        ],
+  _makeBottom(BuildContext context) {
+    return Container(
+      height: 55.0,
+      child: BottomAppBar(
+        color: Color.fromRGBO(58, 66, 86, 1.0),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          children: <Widget>[
+            IconButton(
+              icon: Icon(Icons.home, color: Colors.white),
+              onPressed: () {},
+            ),
+            IconButton(
+              icon: Icon(Icons.blur_on, color: Colors.white),
+              onPressed: () {},
+            ),
+            IconButton(
+              icon: Icon(Icons.hotel, color: Colors.white),
+              onPressed: () {},
+            ),
+            IconButton(
+              icon: Icon(Icons.account_box, color: Colors.white),
+              onPressed: () {
+                Navigator.of(context).push(MaterialPageRoute(
+                    builder: (BuildContext context) => AccountPage()));
+              },
+            )
+          ],
+        ),
       ),
-    ),
-  );
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -110,7 +116,7 @@ class _MyHomePageState extends State<MyHomePage> {
         _connectionStatus == ConnectivityResult.wifi.toString()) {
       return Scaffold(
         backgroundColor: Color.fromRGBO(58, 66, 86, 1.0),
-        bottomNavigationBar: makeBottom,
+        bottomNavigationBar: _makeBottom(context),
         appBar: topAppBar(context),
         body: StreamBuilder<Event>(
           stream:
@@ -127,7 +133,7 @@ class _MyHomePageState extends State<MyHomePage> {
     } else {
       return Scaffold(
         backgroundColor: Color.fromRGBO(58, 66, 86, 1.0),
-        bottomNavigationBar: makeBottom,
+        bottomNavigationBar: _makeBottom(context),
         appBar: topAppBar(context),
         body: Container(
           child: Center(
