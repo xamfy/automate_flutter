@@ -1,5 +1,5 @@
 name: home_automation
-description: A new Flutter project.
+description: Flutter client for home automation project automate
 
 version: 1.0.0+1
 
@@ -14,6 +14,7 @@ dependencies:
   firebase_core:
   cached_network_image: ^0.5.1
   url_launcher:
+  connectivity:
 
 dev_dependencies:
   flutter_test:

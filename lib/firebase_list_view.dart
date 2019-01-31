@@ -31,15 +31,15 @@ class FirebaseListView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    print(documents);
+    // print(documents);
     if (documents != null) {
       return ListView.builder(
         itemCount: documents.length,
         itemBuilder: (BuildContext context, int index) {
           Map<dynamic, dynamic> object = documents[index];
-          print(object);
+          // print(object);
           String title = object['name'];
-          print(title);
+          // print(title);
           bool status = object['status'];
           String url = _findIcon(title);
           Color c = (status == true) ? Colors.indigo : Colors.grey;
@@ -57,8 +57,9 @@ class FirebaseListView extends StatelessWidget {
                     .set({"name": title, "status": status});
               },
               child: Container(
-                decoration:
-                    BoxDecoration(color: Color.fromRGBO(64, 75, 96, .9)),
+                decoration: BoxDecoration(
+                  color: Color.fromRGBO(64, 75, 96, .9),
+                ),
                 child: ListTile(
                   leading: CachedNetworkImage(
                     imageUrl: url,
