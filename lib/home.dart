@@ -112,48 +112,47 @@ class _MyHomePageState extends State<MyHomePage> {
 
   @override
   Widget build(BuildContext context) {
-    if (_connectionStatus == ConnectivityResult.mobile.toString() ||
-        _connectionStatus == ConnectivityResult.wifi.toString()) {
-      return Scaffold(
-        backgroundColor: Color.fromRGBO(58, 66, 86, 1.0),
-        bottomNavigationBar: _makeBottom(context),
-        appBar: topAppBar(context),
-        body: StreamBuilder<Event>(
-          stream:
-              FirebaseDatabase.instance.reference().child('devices').onValue,
-          builder: (BuildContext context, AsyncSnapshot<Event> event) {
-            if (!event.hasData)
-              return new Center(child: CircularProgressIndicator());
-            // print(event.data.snapshot.value);
-            // return Container();
-            return FirebaseListView(documents: event.data.snapshot.value);
-          },
-        ),
-      );
-    } else {
-      return Scaffold(
-        backgroundColor: Color.fromRGBO(58, 66, 86, 1.0),
-        bottomNavigationBar: _makeBottom(context),
-        appBar: topAppBar(context),
-        body: Container(
-          child: Center(
-            child: Container(
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: <Widget>[
-                  Text(
-                    'No connection',
-                    style: TextStyle(
-                        color: Colors.white,
-                        fontWeight: FontWeight.bold,
-                        fontSize: 19.0),
-                  ),
-                ],
-              ),
-            ),
-          ),
-        ),
-      );
-    }
+    // if (_connectionStatus == ConnectivityResult.mobile.toString() ||
+    //     _connectionStatus == ConnectivityResult.wifi.toString()) {
+    return Scaffold(
+      backgroundColor: Color.fromRGBO(58, 66, 86, 1.0),
+      bottomNavigationBar: _makeBottom(context),
+      appBar: topAppBar(context),
+      body: StreamBuilder<Event>(
+        stream: FirebaseDatabase.instance.reference().child('devices').onValue,
+        builder: (BuildContext context, AsyncSnapshot<Event> event) {
+          if (!event.hasData)
+            return new Center(child: CircularProgressIndicator());
+          // print(event.data.snapshot.value);
+          // return Container();
+          return FirebaseListView(documents: event.data.snapshot.value);
+        },
+      ),
+    );
   }
+  // else {
+  //   return Scaffold(
+  //     backgroundColor: Color.fromRGBO(58, 66, 86, 1.0),
+  //     bottomNavigationBar: _makeBottom(context),
+  //     appBar: topAppBar(context),
+  //     body: Container(
+  //       child: Center(
+  //         child: Container(
+  //           child: Row(
+  //             mainAxisAlignment: MainAxisAlignment.center,
+  //             children: <Widget>[
+  //               Text(
+  //                 'No connection',
+  //                 style: TextStyle(
+  //                     color: Colors.white,
+  //                     fontWeight: FontWeight.bold,
+  //                     fontSize: 19.0),
+  //               ),
+  //             ],
+  //           ),
+  //         ),
+  //       ),
+  //     ),
+  //   );
+  // }
 }

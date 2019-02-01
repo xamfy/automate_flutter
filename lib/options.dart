@@ -1,5 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+// import 'package:google_sign_in/google_sign_in.dart';
+
+import 'google_auth.dart';
+import 'auth_provider.dart';
+
+// final GoogleSignIn _googleSignIn = new GoogleSignIn();
 
 class OptionsPage extends StatelessWidget {
   final topAppBar = AppBar(
@@ -17,6 +24,25 @@ class OptionsPage extends StatelessWidget {
     }
   }
 
+  Future<void> _signOut(context) async {
+    try {
+      // await _googleSignIn.disconnect();
+      // await _googleSignIn.signOut();
+      var auth = AuthProvider.of(context).auth;
+      await FirebaseAuth.instance.signOut();
+      await auth.signOutGoogle();
+      print('signed out');
+      Navigator.of(context).pushReplacement(
+        MaterialPageRoute(
+          builder: (BuildContext context) => GoogleAuth(),
+        ),
+        // ModalRoute.withName('/'),
+      );
+    } catch (e) {
+      print(e);
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -26,12 +52,17 @@ class OptionsPage extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            Text(
-              'Add device',
-              style: TextStyle(
-                  fontSize: 22.0,
-                  color: Colors.white,
-                  fontWeight: FontWeight.bold),
+            GestureDetector(
+              onTap: () {
+                _signOut(context);
+              },
+              child: Text(
+                'Sign out',
+                style: TextStyle(
+                    fontSize: 22.0,
+                    color: Colors.white,
+                    fontWeight: FontWeight.bold),
+              ),
             ),
             SizedBox(height: 25.0),
             GestureDetector(

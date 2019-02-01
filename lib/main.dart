@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:home_automation/home.dart';
+import 'google_auth.dart';
+import 'auth.dart';
+import 'auth_provider.dart';
 
-void main() => runApp(MyApp());
+void main() => runApp(AuthProvider(auth: Auth(), child: MyApp()));
 
 class MyApp extends StatelessWidget {
   @override
@@ -15,7 +18,12 @@ class MyApp extends StatelessWidget {
       theme: new ThemeData(
           primaryColor: Color.fromRGBO(58, 66, 86, 1.0),
           primarySwatch: Colors.grey),
-      home: MyHomePage(title: 'Automate'),
+      // home: MyHomePage(title: 'Automate'),
+      // home: GoogleAuth(),
+      initialRoute: '/',
+      routes: {
+        '/': (context) => GoogleAuth(),
+      },
     );
   }
 }
