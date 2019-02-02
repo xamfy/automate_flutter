@@ -59,17 +59,24 @@ class _GoogleAuthState extends State<GoogleAuth> {
       // print(currentUser());
       return Scaffold(
         backgroundColor: Color.fromRGBO(58, 66, 86, 1.0),
-        appBar: AppBar(
-          elevation: 0.1,
-          title: Text('Automate'),
-          automaticallyImplyLeading: false,
-        ),
+        // appBar: AppBar(
+        //   elevation: 0.1,
+        //   title: Text('Automate'),
+        //   automaticallyImplyLeading: false,
+        // ),
         body: Center(
           child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: <Widget>[
-              RaisedButton(
-                child: Text('Log in with Google'),
+              Text(
+                'Automate',
+                style: TextStyle(
+                    fontSize: 30.0,
+                    color: Colors.white,
+                    fontWeight: FontWeight.bold),
+              ),
+              // SizedBox(height: 20.0),
+              new RaisedButton(
                 onPressed: () => _signIn(context).then((FirebaseUser user) {
                       // Navigator.pushReplacement(
                       //     context,
@@ -86,7 +93,52 @@ class _GoogleAuthState extends State<GoogleAuth> {
                                   // onSignedOut: () => _signOut(context),
                                   )));
                     }).catchError((e) => print(e)),
+                color: Colors.white,
+                child: new Container(
+                  width: 230.0,
+                  height: 50.0,
+                  alignment: Alignment.center,
+                  child: new Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      new Padding(
+                        padding: const EdgeInsets.only(right: 20.0),
+                        child: CachedNetworkImage(
+                          imageUrl:
+                              'https://developers.google.com/identity/images/g-logo.png',
+                          width: 30.0,
+                        ),
+                      ),
+                      new Text(
+                        'Sign in With Google',
+                        textAlign: TextAlign.center,
+                        style: new TextStyle(
+                          fontSize: 16.0,
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
               ),
+              // RaisedButton(
+              //   child: Text('Log in with Google'),
+              //   onPressed: () => _signIn(context).then((FirebaseUser user) {
+              //         // Navigator.pushReplacement(
+              //         //     context,
+              //         //     MaterialPageRoute(
+              //         //         builder: (BuildContext context) => HomePage(
+              //         //               user: user,
+              //         //               onSignedOut: () => _signOut(context),
+              //         //             )));
+              //         Navigator.pushReplacement(
+              //             context,
+              //             MaterialPageRoute(
+              //                 builder: (BuildContext context) => MyHomePage(
+              //                     // user: user,
+              //                     // onSignedOut: () => _signOut(context),
+              //                     )));
+              //       }).catchError((e) => print(e)),
+              // ),
             ],
           ),
         ),
