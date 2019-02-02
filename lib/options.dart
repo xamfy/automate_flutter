@@ -32,11 +32,11 @@ class OptionsPage extends StatelessWidget {
       await FirebaseAuth.instance.signOut();
       await auth.signOutGoogle();
       print('signed out');
-      Navigator.of(context).pushReplacement(
+      Navigator.of(context).pushAndRemoveUntil(
         MaterialPageRoute(
           builder: (BuildContext context) => GoogleAuth(),
         ),
-        // ModalRoute.withName('/'),
+        ModalRoute.withName('/'),
       );
     } catch (e) {
       print(e);

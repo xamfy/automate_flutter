@@ -64,6 +64,7 @@ class _MyHomePageState extends State<MyHomePage> {
     return AppBar(
       elevation: 0.1,
       backgroundColor: Color.fromRGBO(58, 66, 86, 1.0),
+      automaticallyImplyLeading: false,
       title: Text('Automate'),
       actions: <Widget>[
         IconButton(
