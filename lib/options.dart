@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'account_page.dart';
 // import 'package:google_sign_in/google_sign_in.dart';
 
 import 'google_auth.dart';
@@ -50,6 +51,20 @@ class OptionsPage extends StatelessWidget {
           children: <Widget>[
             GestureDetector(
               onTap: () {
+                Navigator.of(context).push(MaterialPageRoute(
+                    builder: (BuildContext context) => AccountPage()));
+              },
+              child: Text(
+                'Account',
+                style: TextStyle(
+                    fontSize: 22.0,
+                    color: Colors.white,
+                    fontWeight: FontWeight.bold),
+              ),
+            ),
+            SizedBox(height: 25.0),
+            GestureDetector(
+              onTap: () {
                 _signOut(context);
               },
               child: Text(
@@ -60,25 +75,25 @@ class OptionsPage extends StatelessWidget {
                     fontWeight: FontWeight.bold),
               ),
             ),
-            SizedBox(height: 25.0),
-            GestureDetector(
-              onTap: _launchAbout,
-              child: Text(
-                'About',
-                style: TextStyle(
-                    fontSize: 22.0,
-                    color: Colors.white,
-                    fontWeight: FontWeight.bold),
-              ),
-            ),
-            SizedBox(height: 22.0),
-            Text(
-              'Support',
-              style: TextStyle(
-                  fontSize: 22.0,
-                  color: Colors.white,
-                  fontWeight: FontWeight.bold),
-            )
+            // SizedBox(height: 25.0),
+            // GestureDetector(
+            //   onTap: _launchAbout,
+            //   child: Text(
+            //     'About',
+            //     style: TextStyle(
+            //         fontSize: 22.0,
+            //         color: Colors.white,
+            //         fontWeight: FontWeight.bold),
+            //   ),
+            // ),
+            // SizedBox(height: 22.0),
+            // Text(
+            //   'Support',
+            //   style: TextStyle(
+            //       fontSize: 22.0,
+            //       color: Colors.white,
+            //       fontWeight: FontWeight.bold),
+            // )
           ],
         ),
       ),

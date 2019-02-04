@@ -90,14 +90,14 @@ class _MyHomePageState extends State<MyHomePage> {
               icon: Icon(Icons.home, color: Colors.white),
               onPressed: () {},
             ),
-            IconButton(
-              icon: Icon(Icons.blur_on, color: Colors.white),
-              onPressed: () {},
-            ),
-            IconButton(
-              icon: Icon(Icons.hotel, color: Colors.white),
-              onPressed: () {},
-            ),
+            // IconButton(
+            //   icon: Icon(Icons.blur_on, color: Colors.white),
+            //   onPressed: () {},
+            // ),
+            // IconButton(
+            //   icon: Icon(Icons.hotel, color: Colors.white),
+            //   onPressed: () {},
+            // ),
             IconButton(
               icon: Icon(Icons.account_box, color: Colors.white),
               onPressed: () {
@@ -117,7 +117,7 @@ class _MyHomePageState extends State<MyHomePage> {
     //     _connectionStatus == ConnectivityResult.wifi.toString()) {
     return Scaffold(
       backgroundColor: Color.fromRGBO(58, 66, 86, 1.0),
-      bottomNavigationBar: _makeBottom(context),
+      // bottomNavigationBar: _makeBottom(context),
       appBar: topAppBar(context),
       body: StreamBuilder<Event>(
         stream: FirebaseDatabase.instance.reference().child('devices').onValue,
