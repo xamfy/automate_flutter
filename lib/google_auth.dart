@@ -2,6 +2,8 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+
 import 'auth_provider.dart';
 import 'home.dart';
 
@@ -13,6 +15,7 @@ class GoogleAuth extends StatefulWidget {
 
 class _GoogleAuthState extends State<GoogleAuth> {
   String _currentUser;
+  SharedPreferences prefs;
 
   @override
   void initState() {
@@ -33,8 +36,17 @@ class _GoogleAuthState extends State<GoogleAuth> {
   }
 
   Future<FirebaseUser> _signIn(context) async {
+    prefs = await SharedPreferences.getInstance();
+
     var auth = AuthProvider.of(context).auth;
     FirebaseUser user = await auth.signInWithGoogle();
+    await prefs.setString('id', user.uid);
+    await prefs.setString('nickname', user.displayName);
+    await prefs.setString('photoUrl', user.photoUrl);
+    await prefs.setString('email', user.email);
+    // print(user.photoUrl);
+    String s = prefs.getString('photoUrl');
+    print("photoUrl (signIn):" + s);
     return user;
   }
 
