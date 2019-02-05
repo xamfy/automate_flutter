@@ -4,6 +4,7 @@ import 'dart:async';
 // plugins
 import 'package:firebase_database/firebase_database.dart';
 import 'package:connectivity/connectivity.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 //pages
 import 'firebase_list_view.dart';
@@ -21,6 +22,25 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
   String _connectionStatus;
+
+  SharedPreferences prefs;
+  String id = '';
+  String nickname = '';
+  String email = '';
+  String photoUrl = '';
+
+  void readLocal() async {
+    prefs = await SharedPreferences.getInstance();
+    id = prefs.getString('id');
+    nickname = prefs.getString('nickname');
+    email = prefs.getString('email');
+    photoUrl = prefs.getString('photoUrl');
+    print("photoUrl:" + photoUrl);
+    print("id: " + id);
+    // Force refresh input
+    setState(() {});
+  }
+
   StreamSubscription<ConnectivityResult> _connectionSubscription;
 
   // _snack() async {
@@ -43,6 +63,7 @@ class _MyHomePageState extends State<MyHomePage> {
   @override
   void initState() {
     super.initState();
+    readLocal();
     _connectionSubscription = Connectivity()
         .onConnectivityChanged
         .listen((ConnectivityResult result) {
@@ -120,13 +141,20 @@ class _MyHomePageState extends State<MyHomePage> {
       // bottomNavigationBar: _makeBottom(context),
       appBar: topAppBar(context),
       body: StreamBuilder<Event>(
-        stream: FirebaseDatabase.instance.reference().child('devices').onValue,
+        stream: FirebaseDatabase.instance
+            .reference()
+            .child('devices')
+            .child(id)
+            .onValue,
         builder: (BuildContext context, AsyncSnapshot<Event> event) {
           if (!event.hasData)
             return new Center(child: CircularProgressIndicator());
           // print(event.data.snapshot.value);
           // return Container();
-          return FirebaseListView(documents: event.data.snapshot.value);
+          return FirebaseListView(
+            documents: event.data.snapshot.value,
+            id: id,
+          );
         },
       ),
     );

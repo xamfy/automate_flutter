@@ -6,6 +6,7 @@ import 'account_page.dart';
 
 import 'google_auth.dart';
 import 'auth_provider.dart';
+import 'pages/add_device.dart';
 
 // final GoogleSignIn _googleSignIn = new GoogleSignIn();
 
@@ -49,6 +50,20 @@ class OptionsPage extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
+            GestureDetector(
+              onTap: () {
+                Navigator.of(context).push(MaterialPageRoute(
+                    builder: (BuildContext context) => AddDevicePage()));
+              },
+              child: Text(
+                'Add Device',
+                style: TextStyle(
+                    fontSize: 22.0,
+                    color: Colors.white,
+                    fontWeight: FontWeight.bold),
+              ),
+            ),
+            SizedBox(height: 25.0),
             GestureDetector(
               onTap: () {
                 Navigator.of(context).push(MaterialPageRoute(

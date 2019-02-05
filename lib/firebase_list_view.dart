@@ -6,8 +6,8 @@ DatabaseReference mainReference = FirebaseDatabase.instance.reference();
 
 class FirebaseListView extends StatelessWidget {
   final documents;
-
-  FirebaseListView({this.documents});
+  final id;
+  FirebaseListView({this.documents, this.id});
 
   String _findIcon(title) {
     String a = "https://i.imgur.com/O774D8O.png";
@@ -53,6 +53,7 @@ class FirebaseListView extends StatelessWidget {
                 status = !status;
                 mainReference
                     .child('devices')
+                    .child(id)
                     .child(index.toString())
                     .set({"name": title, "status": status});
               },
@@ -92,6 +93,7 @@ class FirebaseListView extends StatelessWidget {
                       status = !status;
                       mainReference
                           .child('devices')
+                          .child(id)
                           .child(index.toString())
                           .set({"name": title, "status": status});
                     },
