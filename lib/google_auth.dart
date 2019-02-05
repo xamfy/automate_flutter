@@ -103,10 +103,14 @@ class _GoogleAuthState extends State<GoogleAuth> {
                     children: [
                       new Padding(
                         padding: const EdgeInsets.only(right: 20.0),
-                        child: CachedNetworkImage(
-                          imageUrl:
-                              'https://developers.google.com/identity/images/g-logo.png',
-                          width: 30.0,
+                        // child: CachedNetworkImage(
+                        //   imageUrl:
+                        //       'https://developers.google.com/identity/images/g-logo.png',
+                        //   width: 30.0,
+                        // ),
+                        child: Image.asset(
+                          'assets/g-logo.png',
+                          height: 30.0,
                         ),
                       ),
                       new Text(
