@@ -7,9 +7,9 @@ import 'package:connectivity/connectivity.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 //pages
-import 'firebase_list_view.dart';
-import 'options.dart';
-import 'account_page.dart';
+import 'pages/firebase_list_view.dart';
+import 'pages/options.dart';
+import 'pages/account_page.dart';
 
 class MyHomePage extends StatefulWidget {
   MyHomePage({Key key, this.title}) : super(key: key);

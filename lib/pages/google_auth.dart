@@ -4,8 +4,8 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-import 'auth_provider.dart';
-import 'home.dart';
+import '../auth_provider.dart';
+import '../home.dart';
 
 // firebase_auth
 

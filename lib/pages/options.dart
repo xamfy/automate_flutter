@@ -5,8 +5,8 @@ import 'account_page.dart';
 // import 'package:google_sign_in/google_sign_in.dart';
 
 import 'google_auth.dart';
-import 'auth_provider.dart';
-import 'pages/add_device.dart';
+import '../auth_provider.dart';
+import 'add_device.dart';
 
 // final GoogleSignIn _googleSignIn = new GoogleSignIn();
 

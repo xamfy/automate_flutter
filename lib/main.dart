@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:home_automation/home.dart';
-import 'google_auth.dart';
+import 'pages/google_auth.dart';
 import 'auth.dart';
 import 'auth_provider.dart';
 
