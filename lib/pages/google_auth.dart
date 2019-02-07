@@ -3,11 +3,14 @@ import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:firebase_database/firebase_database.dart';
 
 import '../auth_provider.dart';
 import '../home.dart';
 
 // firebase_auth
+
+DatabaseReference mainReference = FirebaseDatabase.instance.reference();
 
 class GoogleAuth extends StatefulWidget {
   _GoogleAuthState createState() => _GoogleAuthState();
@@ -46,7 +49,16 @@ class _GoogleAuthState extends State<GoogleAuth> {
     await prefs.setString('email', user.email);
     // print(user.photoUrl);
     String s = prefs.getString('photoUrl');
-    print("photoUrl (signIn):" + s);
+    // print("photoUrl (signIn):" + s);
+
+    mainReference
+        .child('devices')
+        .child(user.uid)
+        .once()
+        .then((DataSnapshot data) {
+      print("data-key : " + data.key);
+      print("data-value : " + data.value.toString());
+    });
     return user;
   }
 
@@ -55,7 +67,7 @@ class _GoogleAuthState extends State<GoogleAuth> {
       var auth = AuthProvider.of(context).auth;
       await FirebaseAuth.instance.signOut();
       await auth.signOutGoogle();
-      print('signed out');
+      // print('signed out');
     } catch (e) {
       print(e);
     }
@@ -63,9 +75,9 @@ class _GoogleAuthState extends State<GoogleAuth> {
 
   @override
   Widget build(BuildContext context) {
-    print(_currentUser);
+    // print(_currentUser);
     if (_currentUser != "null") {
-      print('if');
+      // print('if');
       return MyHomePage();
     } else {
       // print(currentUser());

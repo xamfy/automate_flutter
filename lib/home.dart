@@ -35,8 +35,8 @@ class _MyHomePageState extends State<MyHomePage> {
     nickname = prefs.getString('nickname');
     email = prefs.getString('email');
     photoUrl = prefs.getString('photoUrl');
-    print("photoUrl:" + photoUrl);
-    print("id: " + id);
+    // print("photoUrl:" + photoUrl);
+    // print("id: " + id);
     // Force refresh input
     setState(() {});
   }

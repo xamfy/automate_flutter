@@ -104,6 +104,21 @@ class FirebaseListView extends StatelessWidget {
           );
         },
       );
+    } else {
+      return Center(
+        child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: <Widget>[
+              Text(
+                'No devices',
+                style: TextStyle(
+                  color: Colors.white,
+                  fontWeight: FontWeight.bold,
+                  fontSize: 22.0,
+                ),
+              ),
+            ]),
+      );
     }
   }
 }
