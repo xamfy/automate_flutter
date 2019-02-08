@@ -26,7 +26,7 @@ class _GoogleAuthState extends State<GoogleAuth> {
     currentUser().then((v) {
       setState(() {
         _currentUser = v;
-        print("_currentUser : " + _currentUser);
+        // print("_currentUser : " + _currentUser);
       });
     });
   }
