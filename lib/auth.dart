@@ -24,7 +24,7 @@ class Auth implements BaseAuth {
     FirebaseUser user = await _firebaseAuth.signInWithGoogle(
         idToken: googleSignInAuthentication.idToken,
         accessToken: googleSignInAuthentication.accessToken);
-    print('${user.displayName}');
+    // print('${user.displayName}');
     return user;
   }
 

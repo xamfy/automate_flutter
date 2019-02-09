@@ -10,6 +10,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'pages/firebase_list_view.dart';
 import 'pages/options.dart';
 import 'pages/account_page.dart';
+import 'models/device.dart';
 
 class MyHomePage extends StatefulWidget {
   MyHomePage({Key key, this.title}) : super(key: key);
@@ -21,6 +22,7 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
+  List<DeviceEntry> devices = new List();
   String _connectionStatus;
 
   SharedPreferences prefs;
@@ -150,11 +152,20 @@ class _MyHomePageState extends State<MyHomePage> {
           if (!event.hasData)
             return new Center(child: CircularProgressIndicator());
           // print(event.data.snapshot.value);
-          // return Container();
-          return FirebaseListView(
-            documents: event.data.snapshot.value,
-            id: id,
-          );
+          Map<dynamic, dynamic> map = event.data.snapshot.value;
+          print(event.data.snapshot.value);
+          // print(event.data.snapshot.value);
+          // print("map " + map.toString());
+          // map.forEach((k, v) => print(v));
+          print(event.data.snapshot.runtimeType);
+          devices.add(DeviceEntry.fromSnapshot(event.data.snapshot));
+          // print(devices[0].toJson());
+          // print(devices[0].name);
+          return Container();
+          // return FirebaseListView(
+          //   documents: event.data.snapshot.value,
+          //   id: id,
+          // );
         },
       ),
     );

@@ -34,7 +34,7 @@ class _GoogleAuthState extends State<GoogleAuth> {
   Future<String> currentUser() async {
     final FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
     FirebaseUser user = await _firebaseAuth.currentUser();
-    print("currentUser(): " + user.toString());
+    // print("currentUser(): " + user.toString());
     return user.toString();
   }
 

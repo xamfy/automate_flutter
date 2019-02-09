@@ -33,7 +33,7 @@ class OptionsPage extends StatelessWidget {
       var auth = AuthProvider.of(context).auth;
       await FirebaseAuth.instance.signOut();
       await auth.signOutGoogle();
-      print('signed out');
+      // print('signed out');
       Navigator.of(context)
           .pushNamedAndRemoveUntil('/', (Route<dynamic> route) => false);
     } catch (e) {
