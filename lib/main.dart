@@ -1,10 +1,18 @@
 import 'package:flutter/material.dart';
+import 'package:firebase_database/firebase_database.dart';
+
 import 'package:home_automation/home.dart';
 import 'pages/google_auth.dart';
 import 'auth.dart';
 import 'auth_provider.dart';
 
-void main() => runApp(AuthProvider(auth: Auth(), child: MyApp()));
+void main() {
+  FirebaseDatabase database;
+  database = FirebaseDatabase.instance;
+  database.setPersistenceEnabled(true);
+  database.setPersistenceCacheSizeBytes(10000000);
+  runApp(AuthProvider(auth: Auth(), child: MyApp()));
+}
 
 class MyApp extends StatelessWidget {
   @override

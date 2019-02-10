@@ -34,7 +34,7 @@ class FirebaseListView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     // print(documents);
-    if (documents != null) {
+    if (documents.length != 0) {
       return ListView.builder(
         itemCount: documents.length,
         itemBuilder: (BuildContext context, int index) {
