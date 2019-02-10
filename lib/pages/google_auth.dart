@@ -68,14 +68,14 @@ class _GoogleAuthState extends State<GoogleAuth> {
     setState(() {
       _isLoading = false;
     });
-    mainReference
-        .child('devices')
-        .child(user.uid)
-        .once()
-        .then((DataSnapshot data) {
-      // print("data-key : " + data.key);
-      // print("data-value : " + data.value.toString());
-    });
+    // mainReference
+    //     .child('devices')
+    //     .child(user.uid)
+    //     .once()
+    //     .then((DataSnapshot data) {
+    //   // print("data-key : " + data.key);
+    //   // print("data-value : " + data.value.toString());
+    // });
     return user;
   }
 
