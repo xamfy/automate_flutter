@@ -178,41 +178,41 @@ class _MyHomePageState extends State<MyHomePage> {
     // if (devices.length != 0) {
     //   print(devices[0].name);
     // }
-    // if (_connectionStatus == ConnectivityResult.mobile.toString() ||
-    //     _connectionStatus == ConnectivityResult.wifi.toString()) {
-    return Scaffold(
-      backgroundColor: Color.fromRGBO(58, 66, 86, 1.0),
-      // bottomNavigationBar: _makeBottom(context),
-      appBar: topAppBar(context),
-      body: FirebaseListView(
-        documents: devices,
-        id: id,
-      ),
-    );
+    if (_connectionStatus == ConnectivityResult.mobile.toString() ||
+        _connectionStatus == ConnectivityResult.wifi.toString()) {
+      return Scaffold(
+        backgroundColor: Color.fromRGBO(58, 66, 86, 1.0),
+        // bottomNavigationBar: _makeBottom(context),
+        appBar: topAppBar(context),
+        body: FirebaseListView(
+          documents: devices,
+          id: id,
+        ),
+      );
+    } else {
+      return Scaffold(
+        backgroundColor: Color.fromRGBO(58, 66, 86, 1.0),
+        // bottomNavigationBar: _makeBottom(context),
+        appBar: topAppBar(context),
+        body: Container(
+          child: Center(
+            child: Container(
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: <Widget>[
+                  Text(
+                    'No connection',
+                    style: TextStyle(
+                        color: Colors.white,
+                        fontWeight: FontWeight.bold,
+                        fontSize: 19.0),
+                  ),
+                ],
+              ),
+            ),
+          ),
+        ),
+      );
+    }
   }
-  // else {
-  //   return Scaffold(
-  //     backgroundColor: Color.fromRGBO(58, 66, 86, 1.0),
-  //     bottomNavigationBar: _makeBottom(context),
-  //     appBar: topAppBar(context),
-  //     body: Container(
-  //       child: Center(
-  //         child: Container(
-  //           child: Row(
-  //             mainAxisAlignment: MainAxisAlignment.center,
-  //             children: <Widget>[
-  //               Text(
-  //                 'No connection',
-  //                 style: TextStyle(
-  //                     color: Colors.white,
-  //                     fontWeight: FontWeight.bold,
-  //                     fontSize: 19.0),
-  //               ),
-  //             ],
-  //           ),
-  //         ),
-  //       ),
-  //     ),
-  //   );
-  // }
 }
