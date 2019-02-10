@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 
+import 'package:home_automation/models/device.dart';
+
 DatabaseReference mainReference = FirebaseDatabase.instance.reference();
 
 class FirebaseListView extends StatelessWidget {
@@ -36,11 +38,11 @@ class FirebaseListView extends StatelessWidget {
       return ListView.builder(
         itemCount: documents.length,
         itemBuilder: (BuildContext context, int index) {
-          Map<dynamic, dynamic> object = documents[index];
+          DeviceEntry object = documents[index];
           // print(object);
-          String title = object['name'];
+          String title = object.name;
           // print(title);
-          bool status = object['status'];
+          bool status = object.status;
           String url = _findIcon(title);
           Color c = (status == true) ? Colors.indigo : Colors.grey;
           Color iconColor = (status == true) ? Colors.greenAccent : Colors.grey;
@@ -49,14 +51,14 @@ class FirebaseListView extends StatelessWidget {
             margin: new EdgeInsets.symmetric(horizontal: 10.0, vertical: 8.0),
             color: c,
             child: InkWell(
-              onTap: () {
-                status = !status;
-                mainReference
-                    .child('devices')
-                    .child(id)
-                    .child(index.toString())
-                    .set({"name": title, "status": status});
-              },
+              // onTap: () {
+              //   status = !status;
+              //   mainReference
+              //       .child('devices')
+              //       .child(id)
+              //       .child(index.toString())
+              //       .set({"name": title, "status": status});
+              // },
               child: Container(
                 decoration: BoxDecoration(
                   color: Color.fromRGBO(64, 75, 96, .9),
@@ -94,7 +96,7 @@ class FirebaseListView extends StatelessWidget {
                       mainReference
                           .child('devices')
                           .child(id)
-                          .child(index.toString())
+                          .child(object.key)
                           .set({"name": title, "status": status});
                     },
                   ),

@@ -56,8 +56,8 @@ class _GoogleAuthState extends State<GoogleAuth> {
         .child(user.uid)
         .once()
         .then((DataSnapshot data) {
-      print("data-key : " + data.key);
-      print("data-value : " + data.value.toString());
+      // print("data-key : " + data.key);
+      // print("data-value : " + data.value.toString());
     });
     return user;
   }

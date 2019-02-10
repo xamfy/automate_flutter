@@ -21,6 +21,8 @@ class MyHomePage extends StatefulWidget {
   _MyHomePageState createState() => _MyHomePageState();
 }
 
+final mainReference = FirebaseDatabase.instance.reference();
+
 class _MyHomePageState extends State<MyHomePage> {
   List<DeviceEntry> devices = new List();
   String _connectionStatus;
@@ -31,6 +33,30 @@ class _MyHomePageState extends State<MyHomePage> {
   String email = '';
   String photoUrl = '';
 
+  _MyHomePageState() {}
+
+  _onEntryAdded(Event event) {
+    setState(() {
+      devices.add(DeviceEntry.fromSnapshot(event.snapshot));
+    });
+  }
+
+  _onEntryRemoved(Event event) {
+    setState(() {
+      devices.removeWhere((entry) => entry.key == event.snapshot.key);
+    });
+  }
+
+  _onEntryEdited(Event event) {
+    var oldValue =
+        devices.singleWhere((entry) => entry.key == event.snapshot.key);
+    setState(() {
+      devices[devices.indexOf(oldValue)] =
+          new DeviceEntry.fromSnapshot(event.snapshot);
+    });
+    // print(devices);
+  }
+
   void readLocal() async {
     prefs = await SharedPreferences.getInstance();
     id = prefs.getString('id');
@@ -40,6 +66,17 @@ class _MyHomePageState extends State<MyHomePage> {
     // print("photoUrl:" + photoUrl);
     // print("id: " + id);
     // Force refresh input
+    mainReference.child('devices').child(id).onChildAdded.listen(_onEntryAdded);
+    mainReference
+        .child('devices')
+        .child(id)
+        .onChildChanged
+        .listen(_onEntryEdited);
+    mainReference
+        .child('devices')
+        .child(id)
+        .onChildRemoved
+        .listen(_onEntryRemoved);
     setState(() {});
   }
 
@@ -75,6 +112,8 @@ class _MyHomePageState extends State<MyHomePage> {
         // print("Connection : $_connectionStatus");
       });
     });
+
+    // print(id);
   }
 
   @override
@@ -136,37 +175,18 @@ class _MyHomePageState extends State<MyHomePage> {
 
   @override
   Widget build(BuildContext context) {
+    // if (devices.length != 0) {
+    //   print(devices[0].name);
+    // }
     // if (_connectionStatus == ConnectivityResult.mobile.toString() ||
     //     _connectionStatus == ConnectivityResult.wifi.toString()) {
     return Scaffold(
       backgroundColor: Color.fromRGBO(58, 66, 86, 1.0),
       // bottomNavigationBar: _makeBottom(context),
       appBar: topAppBar(context),
-      body: StreamBuilder<Event>(
-        stream: FirebaseDatabase.instance
-            .reference()
-            .child('devices')
-            .child(id)
-            .onValue,
-        builder: (BuildContext context, AsyncSnapshot<Event> event) {
-          if (!event.hasData)
-            return new Center(child: CircularProgressIndicator());
-          // print(event.data.snapshot.value);
-          Map<dynamic, dynamic> map = event.data.snapshot.value;
-          print(event.data.snapshot.value);
-          // print(event.data.snapshot.value);
-          // print("map " + map.toString());
-          // map.forEach((k, v) => print(v));
-          print(event.data.snapshot.runtimeType);
-          devices.add(DeviceEntry.fromSnapshot(event.data.snapshot));
-          // print(devices[0].toJson());
-          // print(devices[0].name);
-          return Container();
-          // return FirebaseListView(
-          //   documents: event.data.snapshot.value,
-          //   id: id,
-          // );
-        },
+      body: FirebaseListView(
+        documents: devices,
+        id: id,
       ),
     );
   }
