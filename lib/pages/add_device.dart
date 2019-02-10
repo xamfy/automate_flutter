@@ -15,7 +15,7 @@ class AddDevicePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      // backgroundColor: Color.fromRGBO(58, 66, 86, 1.0),
+      backgroundColor: Color.fromRGBO(58, 66, 86, 1.0),
       appBar: topAppBar,
       body: DeviceForm(),
     );
@@ -65,20 +65,43 @@ class _DeviceFormState extends State<DeviceForm> {
         child: ListView(
           children: <Widget>[
             TextFormField(
+              textCapitalization: TextCapitalization.characters,
+              autofocus: true,
+              style: TextStyle(color: Colors.white, fontSize: 18.0),
               controller: deviceController,
-              decoration: InputDecoration(labelText: 'Device name'),
+              decoration: InputDecoration(
+                  labelText: 'Device name',
+                  errorStyle: TextStyle(color: Colors.white),
+                  enabledBorder: new UnderlineInputBorder(
+                    borderSide: BorderSide(
+                        color: Colors.white,
+                        width: 1.0,
+                        style: BorderStyle.none),
+                  ),
+                  // border: UnderlineInputBorder(
+                  //   borderSide: BorderSide(color: Colors.white),
+                  // ),
+                  // enabledBorder: const OutlineInputBorder(
+                  //   // width: 0.0 produces a thin "hairline" border
+                  //   borderSide: const BorderSide(color: Colors.white),
+                  // ),
+                  // border: OutlineInputBorder(
+                  //   borderSide: BorderSide(color: Colors.white),
+                  // ),
+                  labelStyle: TextStyle(color: Colors.white)),
               validator: (value) {
                 if (value.isEmpty) {
-                  return 'Please enter some text';
+                  return 'Please enter device name';
                 }
               },
             ),
             Container(
               width: screenSize.width,
               child: RaisedButton(
+                padding: EdgeInsets.all(15.0),
                 child: Text(
                   'Add device',
-                  style: TextStyle(color: Colors.white),
+                  style: TextStyle(color: Colors.black),
                 ),
                 onPressed: () {
                   // print(deviceController.text);
@@ -97,7 +120,7 @@ class _DeviceFormState extends State<DeviceForm> {
                     deviceController.clear();
                   }
                 },
-                color: Colors.blue,
+                color: Colors.white,
               ),
               margin: EdgeInsets.only(top: 20.0),
             )
