@@ -82,6 +82,7 @@ class _DeviceFormState extends State<DeviceForm> {
                 ),
                 onPressed: () {
                   // print(deviceController.text);
+                  FocusScope.of(context).requestFocus(new FocusNode());
                   if (_formKey.currentState.validate()) {
                     // If the form is valid, we want to show a Snackbar
                     DeviceEntry device =
@@ -93,6 +94,7 @@ class _DeviceFormState extends State<DeviceForm> {
                         .set(device.toJson());
                     Scaffold.of(context)
                         .showSnackBar(SnackBar(content: Text('Device added')));
+                    deviceController.clear();
                   }
                 },
                 color: Colors.blue,
