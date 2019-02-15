@@ -58,12 +58,18 @@ class _GoogleAuthState extends State<GoogleAuth> {
 
     var auth = AuthProvider.of(context).auth;
     FirebaseUser user = await auth.signInWithGoogle();
-    await prefs.setString('id', user.uid);
-    await prefs.setString('nickname', user.displayName);
-    await prefs.setString('photoUrl', user.photoUrl);
-    await prefs.setString('email', user.email);
-    // print(user.photoUrl);
-    String s = prefs.getString('photoUrl');
+    if (user == null)
+      setState(() {
+        _isLoading = false;
+      });
+    else {
+      await prefs.setString('id', user.uid);
+      await prefs.setString('nickname', user.displayName);
+      await prefs.setString('photoUrl', user.photoUrl);
+      await prefs.setString('email', user.email);
+      // print(user.photoUrl);
+      String s = prefs.getString('photoUrl');
+    }
     // print("photoUrl (signIn):" + s);
 
     setState(() {
