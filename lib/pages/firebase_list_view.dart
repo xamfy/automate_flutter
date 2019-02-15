@@ -111,14 +111,19 @@ class FirebaseListView extends StatelessWidget {
         child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
-              Text(
-                'No devices',
-                style: TextStyle(
-                  color: Colors.white,
-                  fontWeight: FontWeight.bold,
-                  fontSize: 22.0,
-                ),
+              Image.asset(
+                'assets/empty.png',
+                height: 200.0,
               ),
+              // SizedBox(height: 30.0),
+              // Text(
+              //   'No devices',
+              //   style: TextStyle(
+              //     color: Colors.white,
+              //     // fontWeight: FontWeight.bold,
+              //     fontSize: 20.0,
+              //   ),
+              // ),
             ]),
       );
     }
