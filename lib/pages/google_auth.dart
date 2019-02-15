@@ -102,6 +102,10 @@ class _GoogleAuthState extends State<GoogleAuth> {
                 color: Colors.white,
                 fontWeight: FontWeight.bold),
           ),
+          Image.asset(
+            'assets/home.png',
+            height: 250.0,
+          ),
           // SizedBox(height: 20.0),
           new RaisedButton(
             onPressed: () => _signIn(context).then((FirebaseUser user) {

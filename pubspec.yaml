@@ -33,3 +33,5 @@ flutter:
   uses-material-design: true
   assets:
     - assets/g-logo.png
+    - assets/home.png
+    - assets/dashboard.png

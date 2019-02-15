@@ -48,8 +48,16 @@ class OptionsPage extends StatelessWidget {
       appBar: topAppBar,
       body: Center(
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
+          // mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
+            SizedBox(
+              height: 40.0,
+            ),
+            Image.asset(
+              'assets/dashboard.png',
+              height: 200.0,
+            ),
+            SizedBox(height: 32.0),
             GestureDetector(
               onTap: () {
                 Navigator.of(context).push(MaterialPageRoute(
