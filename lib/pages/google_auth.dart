@@ -4,6 +4,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:firebase_database/firebase_database.dart';
+import 'package:transparent_image/transparent_image.dart';
 
 import '../auth_provider.dart';
 import '../home.dart';
@@ -102,8 +103,13 @@ class _GoogleAuthState extends State<GoogleAuth> {
                 color: Colors.white,
                 fontWeight: FontWeight.bold),
           ),
-          Image.asset(
-            'assets/home.png',
+          // Image.asset(
+          //   'assets/home.png',
+          //   height: 250.0,
+          // ),
+          FadeInImage(
+            placeholder: MemoryImage(kTransparentImage),
+            image: AssetImage('assets/home.png'),
             height: 250.0,
           ),
           // SizedBox(height: 20.0),
@@ -139,8 +145,13 @@ class _GoogleAuthState extends State<GoogleAuth> {
                     //       'https://developers.google.com/identity/images/g-logo.png',
                     //   width: 30.0,
                     // ),
-                    child: Image.asset(
-                      'assets/g-logo.png',
+                    // child: Image.asset(
+                    //   'assets/g-logo.png',
+                    //   height: 30.0,
+                    // ),
+                    child: FadeInImage(
+                      placeholder: MemoryImage(kTransparentImage),
+                      image: AssetImage('assets/g-logo.png'),
                       height: 30.0,
                     ),
                   ),

@@ -35,7 +35,7 @@ class _AccountPageState extends State<AccountPage> {
     nickname = prefs.getString('nickname');
     email = prefs.getString('email');
     photoUrl = prefs.getString('photoUrl');
-    print("photoUrl:" + photoUrl);
+    // print("photoUrl:" + photoUrl);
     // print("id: " + id);
     // Force refresh input
     setState(() {});
@@ -50,6 +50,30 @@ class _AccountPageState extends State<AccountPage> {
   //   setState(() {});
   //   // return user?.email;
   // }
+
+  Widget _returnAvatar() {
+    if (photoUrl != "") {
+      return Material(
+        child: CachedNetworkImage(
+          imageUrl: photoUrl,
+          placeholder: Container(
+            child: CircularProgressIndicator(
+              strokeWidth: 2.0,
+            ),
+            width: 90.0,
+            height: 90.0,
+            padding: EdgeInsets.all(20.0),
+          ),
+          width: 90.0,
+          height: 90.0,
+          fit: BoxFit.cover,
+        ),
+        borderRadius: BorderRadius.all(Radius.circular(45.0)),
+        clipBehavior: Clip.hardEdge,
+      );
+    } else
+      return Container();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -78,24 +102,7 @@ class _AccountPageState extends State<AccountPage> {
               //   backgroundImage: CachedNetworkImageProvider(photoUrl),
               //   maxRadius: 50.0,
               // ),
-              Material(
-                child: CachedNetworkImage(
-                  // placeholder: Container(
-                  //   child: CircularProgressIndicator(
-                  //     strokeWidth: 2.0,
-                  //   ),
-                  //   width: 90.0,
-                  //   height: 90.0,
-                  //   padding: EdgeInsets.all(20.0),
-                  // ),
-                  imageUrl: photoUrl,
-                  width: 90.0,
-                  height: 90.0,
-                  fit: BoxFit.cover,
-                ),
-                borderRadius: BorderRadius.all(Radius.circular(45.0)),
-                clipBehavior: Clip.hardEdge,
-              ),
+              _returnAvatar(),
               SizedBox(height: 35.0),
               Container(
                 child: Column(

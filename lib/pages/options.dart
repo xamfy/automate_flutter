@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:transparent_image/transparent_image.dart';
+
 import 'account_page.dart';
 // import 'package:google_sign_in/google_sign_in.dart';
 
@@ -10,7 +12,16 @@ import 'add_device.dart';
 
 // final GoogleSignIn _googleSignIn = new GoogleSignIn();
 
-class OptionsPage extends StatelessWidget {
+class OptionsPage extends StatefulWidget {
+  _OptionsPageState createState() => _OptionsPageState();
+}
+
+class _OptionsPageState extends State<OptionsPage> {
+  @override
+  void initState() {
+    super.initState();
+  }
+
   final topAppBar = AppBar(
     elevation: 0.1,
     backgroundColor: Color.fromRGBO(58, 66, 86, 1.0),
@@ -53,11 +64,16 @@ class OptionsPage extends StatelessWidget {
             SizedBox(
               height: 40.0,
             ),
-            Image.asset(
-              'assets/dashboard.png',
+            // Image.asset(
+            //   'assets/dashboard.png',
+            //   height: 200.0,
+            // ),
+            FadeInImage(
+              placeholder: MemoryImage(kTransparentImage),
+              image: AssetImage('assets/dashboard.png'),
               height: 200.0,
             ),
-            SizedBox(height: 32.0),
+            SizedBox(height: 50.0),
             GestureDetector(
               onTap: () {
                 Navigator.of(context).push(MaterialPageRoute(

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:transparent_image/transparent_image.dart';
 
 import 'package:home_automation/models/device.dart';
 
@@ -109,21 +110,26 @@ class FirebaseListView extends StatelessWidget {
     } else {
       return Center(
         child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: <Widget>[
-              Image.asset(
-                'assets/empty.png',
-                height: 200.0,
+              Text(
+                'No devices',
+                style: TextStyle(
+                  color: Colors.white,
+                  fontWeight: FontWeight.bold,
+                  fontSize: 22.0,
+                ),
               ),
               // SizedBox(height: 30.0),
-              // Text(
-              //   'No devices',
-              //   style: TextStyle(
-              //     color: Colors.white,
-              //     // fontWeight: FontWeight.bold,
-              //     fontSize: 20.0,
-              //   ),
+              // Image.asset(
+              //   'assets/empty.png',
+              //   height: 200.0,
               // ),
+              FadeInImage(
+                placeholder: MemoryImage(kTransparentImage),
+                image: AssetImage('assets/empty.png'),
+                height: 200.0,
+              ),
             ]),
       );
     }
