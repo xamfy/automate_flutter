@@ -17,6 +17,11 @@ void main() {
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    precacheImage(AssetImage('assets/home.png'), context);
+    precacheImage(AssetImage('assets/g-logo.png'), context);
+    precacheImage(AssetImage('assets/dashboard.png'), context);
+    precacheImage(AssetImage('assets/empty.png'), context);
+
     return MaterialApp(
       title: 'Automate',
       debugShowCheckedModeBanner: false,
