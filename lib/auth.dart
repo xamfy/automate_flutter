@@ -18,16 +18,19 @@ class Auth implements BaseAuth {
 
   Future<FirebaseUser> signInWithGoogle() async {
     GoogleSignInAccount googleSignInAccount = await _googleSignIn.signIn();
-    if (googleSignInAccount == null) return null;
-    GoogleSignInAuthentication googleSignInAuthentication =
-        await googleSignInAccount.authentication;
+    if (googleSignInAccount == null)
+      return null;
+    else {
+      GoogleSignInAuthentication googleSignInAuthentication =
+          await googleSignInAccount.authentication;
 
-    FirebaseUser user = await _firebaseAuth.signInWithGoogle(
-        idToken: googleSignInAuthentication.idToken,
-        accessToken: googleSignInAuthentication.accessToken);
-    // print('${user.displayName}');
-    // print(user);
-    return user;
+      FirebaseUser user = await _firebaseAuth.signInWithGoogle(
+          idToken: googleSignInAuthentication.idToken,
+          accessToken: googleSignInAuthentication.accessToken);
+      // print('${user.displayName}');
+      // print(user);
+      return user;
+    }
   }
 
   Future<String> signInWithEmailAndPassword(

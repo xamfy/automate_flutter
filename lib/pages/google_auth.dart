@@ -128,13 +128,15 @@ class _GoogleAuthState extends State<GoogleAuth> {
                   //               user: user,
                   //               onSignedOut: () => _signOut(context),
                   //             )));
-                  Navigator.pushReplacement(
-                      context,
-                      MaterialPageRoute(
-                          builder: (BuildContext context) => MyHomePage(
-                              // user: user,
-                              // onSignedOut: () => _signOut(context),
-                              )));
+                  if (user != null) {
+                    Navigator.pushReplacement(
+                        context,
+                        MaterialPageRoute(
+                            builder: (BuildContext context) => MyHomePage(
+                                // user: user,
+                                // onSignedOut: () => _signOut(context),
+                                )));
+                  }
                 }).catchError((e) => print(e)),
             color: Colors.white,
             child: new Container(

@@ -48,7 +48,7 @@ class FirebaseListView extends StatelessWidget {
           Color c = (status == true) ? Colors.indigo : Colors.grey;
           Color iconColor = (status == true) ? Colors.greenAccent : Colors.grey;
           return Card(
-            elevation: 8.0,
+            elevation: 4.0,
             margin: new EdgeInsets.symmetric(horizontal: 10.0, vertical: 8.0),
             color: c,
             child: InkWell(
