@@ -7,9 +7,9 @@ This repository contains the code for the flutter client for automate which is a
 1. Firebase realtime db
 2. Cloud functions to update device status for an authenticated user
 3. Node-red on a raspberry pi connected to node-mcu to turn on/off devices
-4. Flutter client to change device status in the firebase database
-5. Angular web app to change device status in the firebase database
-
+4. Alternately we can use python script running on raspberry pi to send updates on mqtt server
+5. Flutter client to change device status in the firebase database
+6. Angular web app to change device status in the firebase database
 
 <p float="left">
   <img src="screenshots/flutter_01.png" width="270" height="450" />
