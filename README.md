@@ -10,6 +10,9 @@ This repository contains the code for the flutter client for automate which is a
 4. Flutter client to change device status in the firebase database
 5. Angular web app to change device status in the firebase database
 
-<img src="screenshots/flutter_01.png" width="350" height="600" />
-<img src="screenshots/flutter_02.png" width="350" height="600" />
-<img src="screenshots/flutter_03.png" width="350" height="600" />
+
+<p float="left">
+  <img src="screenshots/flutter_01.png" width="270" height="450" />
+  <img src="screenshots/flutter_02.png" width="270" height="450" />
+  <img src="screenshots/flutter_03.png" width="270" height="450" />
+</p>
